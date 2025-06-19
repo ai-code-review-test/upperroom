@@ -18,6 +18,7 @@ app.use(cors({
   optionsSuccessStatus: 204
 }));
 
+console.log('good')
 
 dbconnect();
 // JSON 파싱을 위한 미들웨어
@@ -32,7 +33,6 @@ app.use('/room',roomRouter);
 app.use('/shop',shopRouter);
 app.use('/exp',expRouter);
 
-console.log('jiyu jang good')
 // 서버 시작
 app.listen(port, () => {
   console.log(`서버가 http://localhost:${port} 에서 실행 중입니다`);
