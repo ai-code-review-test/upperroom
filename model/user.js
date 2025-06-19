@@ -1,120 +1,38 @@
 const mongoose = require('mongoose');
-const moment = require('moment-timezone');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
+const dayjs = require('dayjs');
+const timezone = require('dayjs/plugin/timezone');
+const utc = require('dayjs/plugin/utc');
+
+dayjs.extend(timezone);
+dayjs.extend(utc);
 
 const userSchema = new Schema({
-    email: String,
-    ageRange: String,
-    birth: String,
-    phone: Number,
-    password: String,
-    name: String,
-    userkeydi: {
-        type: String,
-        required: true,
+    email: {
+      type: String,
+      required: true,
+      unique: true
     },
-    userkeyci: {
-        type: String,
+    password: {
+      type: String,
+      required: true
     },
-    klip: {
-        type: String,
-        default: "notklip"
-    },
-    marketingAgreement: {
-        type: Boolean,
-        default: false
-    },
-    attendanceAgreement: {
-        type: Boolean,
-        default: false
-    },    
-    challengeAgreement: {
-        type: Boolean,
-        default: false
-    },    
-    receiptAgreement: {
-        type: Boolean,
-        default: false
-    },    
-    gender: String,
-    refererCode: String,
-    recommender: String,
-    points: {
-        type: Number,
-        default: 0
-    },
-    pushAlert: {
-        type: Boolean,
-        default: false
-    },
-    lastUploadTime: Date,
-    consecutiveWeeks: {
-        type: Number,
-        default: 0
-    },
-    consecutiveUploads: {
-        type: Number,
-        default: 0
-    },
-    canPurchaseTime: String,
-    ageRange: String,
-    userID: {
-        type: String,
-    },
-    bubbleUser: {
-        type: Boolean,
-        default: false
-    },
-    datedoc: {
+    createdAt: {
         type: Date,
-        default: () => new Date(Date.now()).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
+        default: () => dayjs().toDate()
     },
-    isDeleted: {
-        type: String,
-        default: "false"
-    },
-    deleteDate: {
-        type: String,
-        default: "아니오"
-    },
-    userID: {
-        type: String,
-        default: "notbubble"
-    },
-    playerID: {
-        type: String,
-        default: "notbubble"
-    },
-    onboarding: {
-        type: Boolean,
-        default: false
-    },
-    socialType: {
-        type: String,
-        default: "email"
-    },
-    gmoToken: {
-        type: String,
-    },
-    klip: {
-        type: String,
-        default: "notklip"
-    },
-    adid: {
-        type: String,
-    },
-    createdDate: {
-        type: String,
-        default: () => moment().tz('Asia/Seoul').format('YYYY MMM D, h:mm A')
-        // default: () => new Date(Date.now()).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
-    },
-    modifiedDate: {
-        type: String,
-        default: () => moment().tz('Asia/Seoul').format('YYYY MMM D, h:mm A')
-        // default: () => new Date(Date.now()).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
+    updatedAt: {
+        type: Date,
+        default: () => dayjs().toDate()
     }
 });
 
-
+userSchema.pre('save', async function(next) {
+    if (!this.isModified('password')) return next();
+    this.password = await bcrypt.hash(this.password, 10);
+    this.updatedAt = dayjs().toDate();
+    next();
+});
 
 module.exports = mongoose.model('User', userSchema);
