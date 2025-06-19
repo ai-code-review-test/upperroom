@@ -9,8 +9,8 @@ const dbconnect = require('./model/mongoose');
 const cors = require('cors');
 
 app.use(cors({
-  origin: ['http://34.64.123.146', 'http://101.79.10.182', 'http://localhost:3000'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: ['http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
   exposedHeaders: ['Content-Length', 'Content-Type'],
   credentials: true,
