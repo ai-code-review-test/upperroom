@@ -1,2 +1,3 @@
 # upperroom
-<img width="647" alt="스크린샷 2025-05-13 오후 3 14 12" src="https://github.com/user-attachments/assets/be524ec7-dc7f-4d29-aeea-00bade32ef01" />
+그녀의 흔적...
+<img width="370" alt="스크린샷 2025-06-12 오후 2 42 55" src="https://github.com/user-attachments/assets/0f82ca91-c2b7-4403-aa7d-164cf107af38" />
