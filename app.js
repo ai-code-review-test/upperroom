@@ -7,6 +7,8 @@ const shopRouter = require('./routes/shopRouter');
 const expRouter = require('./routes/expRouter');
 const dbconnect = require('./model/mongoose');
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
 
 app.use(cors({
   origin: ['http://localhost:3000'],
