@@ -18,7 +18,7 @@ app.use(cors({
   optionsSuccessStatus: 204
 }));
 
-console.log('good');
+console.log('good!');
 
 dbconnect();
 // JSON 파싱을 위한 미들웨어
