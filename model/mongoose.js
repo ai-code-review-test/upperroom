@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
-const env = require('../env.json');
-
-const url = `mongodb://${env.USERNAME}:${env.PASSWORD}@${env.URL}/${env.DBNAME}?retryWrites=true&w=majority`;
-
-console.log(process.env.USERNAME);
+const url = `mongodb://${process.env.USERNAME}:${process.env.PASSWORD}@${process.env.URL}/${process.env.DBNAME}?retryWrites=true&w=majority`;
 
 const dbconnect = async () => {
     try {
